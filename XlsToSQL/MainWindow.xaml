@@ -4,9 +4,59 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XlsToSQL"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        SizeToContent="WidthAndHeight"
+        WindowState="Normal"
+        ResizeMode="CanMinimize"
+        Title="XLS to SQL" Height="450" Width="525" Icon="iconfinder_application-vnd.ms-excel_28861.ico" WindowStartupLocation="CenterScreen" FontSize="14" WindowStyle="ToolWindow">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Menu>
+                <Button Click="btnLimpar_Click" Name="btnLimpar" Content="Limpar"/>
+                <ComboBox x:Name="comboTipo"
+                  materialDesign:HintAssist.Hint="Selecione"
+                  IsEditable="False"
+                  materialDesign:HintAssist.HintOpacity=".26">
+                    <ComboBoxItem>
+                        Insert
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Update
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="txtTabela" materialDesign:HintAssist.Hint="Nome da tabela" ></TextBox>
+                <Button Click="btnExportar_Click" x:Name="btnExportar" Content="Exportar"/>
+            </Menu>
+        </StackPanel>
+        <Grid  Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Content="Selecione o arquivo"></Label>
+            <Button Click="btnSelect_Click" x:Name="btnSelect" Grid.Column="0" Grid.Row="1" Content="Selecionar" ></Button>
+            <TextBox x:Name="txtPath" Grid.Column="1" Grid.Row="1" IsEnabled="False" ></TextBox>
+            <TextBox  x:Name="txtResult" IsReadOnly="True" Height="270" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" MouseDoubleClick="txtResult_MouseDoubleClick"></TextBox>
+            <Button x:Name="btnProcess" Click="btnProcess_Click" Grid.ColumnSpan="3" Grid.Row="3" Content="Processar" Style="{StaticResource MaterialDesignRaisedButton}"
+    materialDesign:ButtonProgressAssist.Value="-1"
+    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+    materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+    Margin="2,0" ></Button>
+        </Grid>
+    </StackPanel>
 </Window>
